@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar {
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    background-color: rgb(25, 25, 25);
+    left: -20%;
+    transition: all 500ms linear;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+#sidebar ul li {
+    color: rgba(230, 230, 230, 0.9);
+    text-align: center;
+    border-bottom: 1px solid rgba(230, 230, 230, 0.9);
+    padding: 10% 0 10%;
+    list-style: none;
+}
+
+.logo {
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+#sidebar .toggle-btn {
+    position: absolute;
+    left: 115%;
+    top: 2%;
+    cursor: pointer;
+}
+
+#sidebar .toggle-btn span {
+    font-size: 1.8em;
+    display: block;
+    width: 40px;
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+#sidebar .toggle-btn span:hover {
+    color: rgb(153, 10, 20);
+    border: 1px solid rgb(153, 10, 20);
+}
+
+
+
+
