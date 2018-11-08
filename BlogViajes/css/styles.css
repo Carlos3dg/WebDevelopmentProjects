@@ -1,0 +1,35 @@
+html{
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+} 
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    padding: 20px 0;
+}
+
+.contenedor {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/* MENU */
+.navegacion{
+    background-color: #db008d;
+}
+
+nav{
+    
+}
