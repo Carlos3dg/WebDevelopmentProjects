@@ -17,7 +17,7 @@ body{
 }
 
 header {
-    padding: 20px 0;
+    padding: 20px 0 0;
 }
 
 .contenedor {
@@ -73,28 +73,108 @@ nav ul ul {
 
 nav ul li:hover > ul {
     display: block;
-}
+} /*Direct descendets*/
 
 nav ul li:hover {
     background-color: rgba(0, 184, 228, 1);
 }
 
 /* Main Section */
-div.contenido {
-
-}
-
 main{
     width: 70%;
     float: left;
     padding-right: 40px;
+    margin-bottom: 30px;
 }
 
+/* Post News */
+article {
+    margin-top: 30px;
+}
+
+h2 {
+    color: #00b8e4;
+    margin-bottom: 20px;
+}
+
+article img {
+    float: left;
+    width: 300px;
+    margin-right: 20px;
+}
+
+article p  {
+    line-height: 2;
+    text-align: justify;  
+}
+
+.boton {
+    background-color: #00b8e4;
+    padding: 10px 30px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* Sidebar */
 aside {
     width: 30%;
     float: right;
+    margin-top: 30px;
 }
 
+aside ul {
+    list-style: none;
+}
+
+aside ul li a {
+    text-decoration: none;
+    color: #00b8e4;
+    display: block;
+    padding: 10px 0 10px 10px;
+}
+
+aside ul li a:hover {
+    background-color: #00b8e4;
+    color: #fff;
+}
+
+/* Footer */
 footer {
     clear: both;
+    background-color: #db008d;
+    padding-top: 40px;
+    color: white;
+}
+
+footer h2 {
+    color: white;
+}
+
+footer div.nosotros{
+    float: left;
+    width: 35%;
+}
+
+footer div.menu {
+  width: 40%;
+  float: right;
+}
+
+footer div nav {
+    width: 100%;
+}
+
+footer div nav ul li a {
+    width: auto;
+}
+
+p.copyright {
+    clear: both;
+    text-align: center;
+    padding: 20px 0;
 }
