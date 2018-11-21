@@ -1,0 +1,266 @@
+/*Reset browser styles*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1.3;
+}
+
+ol { 
+	padding-left: 0;
+	list-style: none
+}
+
+ul {
+	padding-left: 0;
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+} 
+
+a {
+    text-decoration: none;
+}
+/* end reset browser styles */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');
+
+/* General styles */
+html, body {
+    font-size: 18px;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: rgb(107, 105, 105);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: rgb(65, 63, 63);
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+h3 {
+    font-size: 1.6em;
+}
+
+h4 {
+    font-size: 1.4em;
+}
+
+h5 {
+    font-size: 1.2em;
+}
+
+p {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+a:link {
+    color: rgb(107, 105, 105);
+}
+
+a:visited {
+    color: rgb(107, 105, 105);
+}
+
+.button {
+    display: inline-block;
+    font-weight: 600;
+}
+
+.clearfix {
+    clear: both;
+    overflow: hidden;
+}
+
+.container, .header, .footer {
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+/* HEADER */
+.header {
+}
+
+.container__nav-links {
+    height: 6vh;
+    background-color: rgb(133, 232, 245);
+}
+
+.container__nav-links li{
+    float: left;
+    width: 33.33%;
+    height: 100%;
+    display: table;
+}
+
+.nav__links {
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.nav__links:hover {
+    font-weight: 600;
+    border-bottom: 3px solid rgb(107, 105, 105);
+}
+
+/* LOGIN */
+
+
+/* INDEX CONTENT */
+.index__option-container {
+    width: 46%;
+    margin: 2%;
+    padding: 1.5%;
+    border: 2px solid rgb(155, 154, 154);
+    float: left;
+    text-align: center;
+    height: 50%;
+}
+
+.index__container .index__option-container:nth-child(2n + 1){
+    clear: both;
+}
+
+.index__image-container {
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 60%;
+    border-radius: 50%; 
+    background-repeat: no-repeat;
+    background-size: 85%;
+    background-position: center center;
+}
+
+.index__info-container {
+    margin-top: 8%;
+}
+
+.index__info-container  h2 {
+    text-transform: uppercase;
+    margin-bottom: 4%;
+}
+
+.index-btn {
+    margin: 10% 0 7% 0;
+    width: 75%;
+    padding: 6% 0 6% 0;
+}
+
+/*Saldo container*/
+.index__saldo-img {
+    background-color: rgb(68, 210, 25);
+    background-image: url(../img/saldo.png);
+}
+
+a.saldo__button {
+    border: 2px solid rgb(68, 210, 25);
+    color: rgb(68, 210, 25);
+}
+
+.saldo__option-container:hover {
+    border: 3px solid rgb(68, 210, 25);
+}
+
+.saldo__option-container:hover .saldo__button {
+    border: 2px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    background-color: rgb(68, 210, 25);
+}
+
+/*Trámite container*/
+.index__tramite-img {
+    background-color: #00acff;
+    background-image: url(../img/tramite-feria.png);
+}
+
+a.tramite__button {
+    border: 2px solid #00acff;
+    color: #00acff;
+}
+
+.tramite__option-container:hover {
+    border: 3px solid #00acff;
+}
+
+.tramite__option-container:hover .tramite__button {
+    border-color: white;
+    color: white;
+    background-color: #00acff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card {
+    margin: 0 auto;
+    padding: 1em;
+    width:100%;
+    background-color: #00acff;
+    border: 0;
+  }
+
+  .btn {
+      margin: 0 auto;
+      padding: 0;
+      width: 85%;
+     font-size: 18px;
+     border: 2px solid #ffffff
+  }
+
+  .profile-img-card {
+      margin: 0 auto;
+      width: 75%;
+      height: 18%;
+  }
+
+  .forgot-password {
+      color: white;
+  }
