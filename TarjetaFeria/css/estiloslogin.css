@@ -107,10 +107,54 @@ a:visited {
 
 /* HEADER */
 .header {
+    position: fixed;
+    top: 0;
+}
+
+/* Sidebar menu */
+.sidebar__menu {
+    position: fixed;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    left: -50%;
+    background-color: rgb(133, 232, 245);
+    transition: all 500ms linear;
+    border-right: 2px solid rgba(155, 154, 154, 0.7);
+}
+
+.active__sidebar {
+    left: 0;
+}
+
+.toggle__button {
+   position: absolute;
+   left: 110%;
+   top: 0;
+   cursor: pointer;
+   font-size: 1.6em;
+   color: #ffffff;
+   font-weight: 700;
+   height: 6vh;
+   top: 0.8%;
+}
+
+.sidebar__options {
+    text-align: center;
+}
+
+.profile__image {
+    width: 70%;
+}
+
+.header__menu {
+    width: 100%;
+    height: 50%;
+    background: #00acff;
 }
 
 .container__nav-links {
-    height: 6vh;
+    height: 50%;
     background-color: rgb(133, 232, 245);
 }
 
@@ -138,11 +182,15 @@ a:visited {
 
 
 /* INDEX CONTENT */
+.index__container {
+    margin-top: 12vh;
+}
+
 .index__option-container {
     width: 46%;
     margin: 2%;
     padding: 1.5%;
-    border: 2px solid rgb(155, 154, 154);
+    border: 1px solid rgba(155, 154, 154, 0.7);
     float: left;
     text-align: center;
     height: 50%;
@@ -219,6 +267,49 @@ a.tramite__button {
     background-color: #00acff;
 }
 
+/* Bus map container */
+.index__busmap-img {
+    background-color: rgb(243, 192, 26);
+    background-image: url(../busmap-icon.png);
+    background-size: 65%;
+}
+
+a.busmap__button {
+    border: 2px solid rgb(243, 192, 26);
+    color: rgb(243, 192, 26);
+}
+
+.busmap__option-container:hover {
+    border: 3px solid rgb(243, 192, 26);
+}
+
+.busmap__option-container:hover .busmap__button {
+    border-color: white;
+    color: white;
+    background-color: rgb(243, 192, 26);
+}
+
+/* Vialidad */
+.index__vialidad-img {
+    background-color: rgb(156, 12, 192);
+    background-image: url(../img/vialidad-icon.png);
+    background-size: 70%;
+}
+
+a.vialidad__button {
+    border: 2px solid rgb(156, 12, 192);
+    color: rgb(156, 12, 192);
+}
+
+.vialidad__option-container:hover {
+    border: 3px solid rgb(156, 12, 192);
+}
+
+.vialidad__option-container:hover .vialidad__button {
+    border-color: white;
+    color: white;
+    background-color: rgb(156, 12, 192);
+}
 
 
 
