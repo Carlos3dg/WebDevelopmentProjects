@@ -134,7 +134,7 @@ a:visited {
     float: left;
  }
  
- .toggle__button span {
+ .toggle__button i {
      display: table-cell;
      vertical-align: middle;
  }
@@ -193,9 +193,9 @@ a:visited {
 .sidebar__menu {
     position: fixed;
     height: 100%;
-    width: 50%;
+    width: 60%;
     top: 0;
-    left: -50%;
+    left: -60%;
     background-color: rgb(133, 232, 245);
     transition: all 500ms linear;
 }
@@ -208,17 +208,18 @@ a:visited {
     background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
     top: 0;
-    left: 50%;
-    width: 50%;
+    left: 60%;
+    width: 40%;
     height: 100%;
 }
 
 .sidebar__options {
-    text-align: center;
+    padding: 4% 7%;
 }
 
-.profile__image {
+.profile__image-container {
     width: 70%;
+    padding-top: 20%;
 }
 
 
