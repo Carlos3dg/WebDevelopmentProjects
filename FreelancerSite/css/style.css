@@ -1,6 +1,7 @@
 :root {
     --primario: #ffc107;
     --secundario: #0097a7;
+    --gris: #757575;
     --oscuro: #212121; /*Personalize property used like a variable*/
 }
 
@@ -33,6 +34,11 @@ h3 {
     color: var(--secundario);
     font-weight: 400;
     font-size: 2.5rem;
+}
+
+p {
+    font-size: 1.8rem;
+    line-height: 2;
 }
 
 .site-header {
@@ -117,6 +123,11 @@ h3 {
     margin-top: 1rem;
     border-radius: 0.5rem;
     text-transform: uppercase;
+    border: none;
+}
+
+.button:hover{
+    cursor: pointer;
 }
 
 .contenedor {
@@ -125,27 +136,108 @@ h3 {
     background-color: #fff;
     padding: 3rem;
     border-radius: 1rem;
-}
-
-.servicios {
     margin: 3rem auto;
     box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.7);
+}
+
+.contenedor-servicios {
+    margin-top: 2rem;
 }
 
 @media (min-width: 768px) {
     .contenedor-servicios {
         display: flex;
+        justify-content: space-between;
     }
 
     .servicio {
-        flex: 1;
+        flex: 0 0 calc(33.3% - 1rem);
     }
 }
 
 /* flex: value1 value2 value3;
-    Value1: Represents the growth factor, this value distribute the width to every element inside the flex element, if the value is 1 every element will have the same width, if one of them has 2 the flex element will divided in one more element besides the ones that already has, for example if the flex element has 3 sons elements then with the value of 1 to every of those elements means to divide the flex element in 3 parts but if one of their sons has 2 then the flex element will be divided in the next way: first son 1, sencond son 1 and third son 2, so 1 + 1 + 2 = 4, concluiding the division in 4.
+    Value1: Represents the growth factor, this value distribute the width to every element inside the flex element, if the value is 1 every element will have the same width, if one of them has 2 the flex element will be divided in one more element besides the ones that already has, for example if the flex element has 3 sons elements then with the value of 1 to every of those elements means to divide the flex element in 3 parts but if one of their sons has 2 then the flex element will be divided in the next way: first son 1, sencond son 1 and third son 2, so 1 + 1 + 2 = 4, concluiding the division in 4.
 
+    Value3: Represents the base of the element, here it is possible to declare a max width or max grouth in our flex element son, in this way every element should have this size as max. Note. This value works if the other two values are 0.
 */
 
+.servicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.iconos {
+    width: 100px;
+    height: 100px;
+    background-color: var(--primario);
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+}
+
+form {
+    background-color: var(--gris);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 3rem;
+}
+
+form legend {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primario);
+    margin: 3rem 0;
+}
+
+@media (min-width: 768px) {
+    form {
+        max-width: 800px;
+        margin: 3rem auto;
+    }
+
+    .contenedor-campos {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .campo {
+        flex: 0 0 calc(50% - 1rem);
+    }
+}
+
+.campo {
+    display: flex;
+    margin-bottom: 2rem;
+    
+}
+
+.campo label {
+    flex: 0 0 90px;
+    padding-top: .5rem;
+    color: #fff;
+}
+
+.campo input {
+    flex: 1;
+    height: 4rem;
+}
+
+.campo textarea {
+    flex: 1;
+    height: 6rem;
+}
+
+.w-100 {
+    flex: 0 0 100%;
+}
+
+.enviar {
+    display: flex;
+    justify-content: flex-end;
+}
 

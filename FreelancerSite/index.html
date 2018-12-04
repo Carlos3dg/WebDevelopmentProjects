@@ -31,8 +31,8 @@
             <a href="#" class="button">Contactar</a>
         </div>
     </div>
-
-    <main class="servicios contenedor">
+<div class="contenedor">
+    <main class="servicios">
         <h2>Nuestros Servicios</h2>
         <div class="contenedor-servicios">
             <div class="servicio">
@@ -60,6 +60,35 @@
             </div>
         </div>
     </main>
+
+    <section id="contacto" class="contacto">
+        <h2>Contacto</h2>
+        <form action="#">
+            <legend>Contactános llenando todos los campos</legend>
+            <div class="contenedor-campos">
+                <div class="campo">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" placeholder="Nombre">
+                </div>
+                <div class="campo">
+                    <label>Teléfono:</label>
+                    <input type="tel" name="telefono" placeholder="Telefono">
+                </div>
+                <div class="campo w-100">
+                    <label>Correo:</label>
+                    <input type="mail" name="correo" placeholder="Correo">
+                </div>
+                <div class="campo w-100">
+                    <label>Mensaje:</label>
+                    <textarea></textarea>
+                </div>
+            </div>
+            <div class="enviar">
+                <input type="submit" class="button" value="Enviar">
+            </div>
+        </form>
+    </section>
+</div>
 
 </body>
 </html>
