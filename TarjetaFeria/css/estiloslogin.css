@@ -105,6 +105,14 @@ a:visited {
     width: 100%;
 }
 
+.hide__element {
+    display: none;
+}
+
+.show__element {
+    display: block;
+}
+
 /* HEADER */
 .header {
     position: fixed;
@@ -185,6 +193,11 @@ a:visited {
 }
 
 .nav__links:hover {
+    font-weight: 600;
+    border-bottom: 3px solid rgb(107, 105, 105);
+}
+
+.nav__link-clicked {
     font-weight: 600;
     border-bottom: 3px solid rgb(107, 105, 105);
 }
@@ -314,7 +327,6 @@ a.profile__button {
 }
 
 /* LOGIN */
-
 
 /* INDEX CONTENT */
 .index__container {
@@ -446,6 +458,7 @@ a.vialidad__button {
     background-color: rgb(156, 12, 192);
 }
 
+/*------------ HELP CONTENT -------------*/
 
 
 

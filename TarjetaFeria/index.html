@@ -40,15 +40,15 @@
                         </div>
                     </div>
                     <ul class="container container__nav-links">
-                        <li><a href="#" id="sesion" class="nav__links">Iniciar Sesión</a></li>
-                        <li><a href="##" id="principal" class="nav__links">Principal</a></li>
-                        <li><a href="###" id="ayuda" class="nav__links">Ayuda</a></li>
+                        <li><a href="#" id="sesion" class="nav__links nav__link-clicked">Iniciar Sesión</a></li>
+                        <li><a href="##" id="index" class="nav__links">Principal</a></li>
+                        <li><a href="###" id="help" class="nav__links">Ayuda</a></li>
                     </ul>
                 </div>
             </nav>
         </header>
     <!------------------------ LOGIN ---------------------->
-        <div class="card card-container clearfix" id="sesion_content" style="display: none;">
+        <div class="card card-container clearfix sesion__container show__element hide__element">
             <img id="profile-img" class="profile-img-card" src="img/logo-feria.png" />
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin">
@@ -67,7 +67,7 @@
             </a>
         </div>
 <!---------------------- MAIN ---------------------->
-        <div class="container index__container">
+        <div class="container index__container hide__element">
             <div class="index__option-container saldo__option-container">
                 <div class="index__image-container index__saldo-img">
                     
@@ -113,6 +113,11 @@
             </div>
 
         </div>
+
+    <!----------------------------- HELP ------------------------------>
+    <div class="help__container hide__element">
+
+    </div>
     
     <script src="js/menujs.js"></script>
 
