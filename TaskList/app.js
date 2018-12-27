@@ -12,8 +12,8 @@ form.addEventListener('submit', function(e) {
     const task = document.querySelector('.input__task').value;
     //Validate form
     if(task !== ''){
-        console.log(taskList.childElementCount);
-        console.log(taskList.querySelectorAll('.greenTasks').length);
+        //console.log(taskList.childElementCount);
+        //console.log(taskList.querySelectorAll('.greenTasks').length);
         //List Element creation
         const divTask = document.createElement('div');
         divTask.classList.add('task__container', 'redTasks');
@@ -32,6 +32,8 @@ form.addEventListener('submit', function(e) {
         }
 
         getTaskData(taskList);
+        /*const taskObject = saveTaskDataInLS();*/
+        /*console.log(taskObject);*/
 
     } else {
         alert('Primero escriba una tarea');
@@ -140,6 +142,7 @@ function getTaskData(taskList) {
     }
     
     saveTaskDataInLS(taskData);
+    //return taskData;
 }
 
 //Function to save the task data in LS 
@@ -147,10 +150,21 @@ function saveTaskDataInLS(newTask) {
     let task;
 
     task = changeLSinArray();
-
-    task.push(newTask);
+    //A map function to get all classTask properties as array
+    const classArray = task.map(function(task) {
+        return task.classTask;
+    })
+    //The index number of an element with the greenTasks value
+    const indexGreenTask = classArray.indexOf('task__container greenTasks')
+    //Condition to insert the new tasks before a green one in our storage
+    if (indexGreenTask !== -1) {
+        task.splice(indexGreenTask, 0, newTask);
+    } else {
+        task.push(newTask);
+    }
 
     localStorage.setItem('tasks', JSON.stringify(task));
+    /*return task;*/
 }
 
 //Function to change LS in an array
