@@ -3,6 +3,7 @@ const form = document.querySelector('.form__task');
 const taskContainer = document.querySelector('.task-list__container');
 const taskList = document.querySelector('.task-list')
 let i = 0;
+
 //EVENT LISTENERS
 //Submit Event
 form.addEventListener('submit', function(e) {
@@ -11,10 +12,10 @@ form.addEventListener('submit', function(e) {
     const task = document.querySelector('.input__task').value;
     //Validate form
     if(task !== ''){
-        i++;
         //List Element creation
         const divTask = document.createElement('div');
         divTask.classList.add('task__container', 'redTasks');
+        divTask.setAttribute('data-id', i++);
         divTask.innerHTML = `<span class="task">${task}</span>
                             <input type="checkbox" class="task__column" value="toDo" checked>
                             <input type="checkbox" class="task__column" value="done">
@@ -27,6 +28,8 @@ form.addEventListener('submit', function(e) {
         } else {
             taskList.insertBefore(divTask, greenTask);
         }
+
+        getTaskData(taskList);
 
     } else {
         alert('Primero escriba una tarea');
@@ -68,3 +71,39 @@ taskContainer.addEventListener('click', function(e) {
         e.target.parentElement.remove();
     }
 });
+
+//FUNCTIONS 
+//Function to save the task data in an object
+function getTaskData(taskList) {
+    const taskData = {
+        classTask: taskList.querySelector('div.task__container').classList.value,
+        task: taskList.querySelector(`div[data-id='${i-1}'] span`).textContent,
+        id: taskList.querySelector(`div[data-id='${i-1}']`).getAttribute('data-id')
+    }
+    
+    saveTaskDataInLS(taskData);
+}
+
+//Function to save the task data in LS 
+function saveTaskDataInLS(newTask) {
+    let task;
+
+    task = changeLSinArray();
+
+    task.push(newTask);
+
+    localStorage.setItem('tasks', JSON.stringify(task));
+}
+
+//Function to change LS in an array
+function changeLSinArray() {
+    let taskListLS;
+
+    if (localStorage.getItem('tasks') === null) {
+        taskListLS = [];
+    } else {
+        taskListLS = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    return taskListLS;
+}
