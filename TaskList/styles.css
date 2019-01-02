@@ -35,6 +35,12 @@ p, span {
     font-size: 0.7em;
 }
 
+@media (max-width: 600px) {
+    p, span {
+        font-size: 0.9em;
+    }
+}
+
 /* INDEX */
 /* Form */
 .main__container {
