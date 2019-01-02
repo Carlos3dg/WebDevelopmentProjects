@@ -30,8 +30,6 @@ form.addEventListener('submit', function(e) {
     const task = document.querySelector('.input__task').value;
     //Validate form
     if(task !== ''){
-        //console.log(taskList.childElementCount);
-        //console.log(taskList.querySelectorAll('.greenTasks').length);
         //List Element creation
         const divTask = document.createElement('div');
         divTask.classList.add('task__container', 'redTasks');
