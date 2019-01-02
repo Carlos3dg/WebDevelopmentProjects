@@ -5,6 +5,24 @@ const taskList = document.querySelector('.task-list')
 let i = 0;
 
 //EVENT LISTENERS
+//DOMContent loaded event
+document.addEventListener('DOMContentLoaded', function() {
+    let importTasks;
+    importTasks = changeLSinArray();
+
+    importTasks.forEach(function(taskData, index) {
+        const divTask = document.createElement('div');
+        divTask.className = `${taskData.classTask}`;
+        divTask.setAttribute('data-id', index);
+        divTask.innerHTML = `<span class="task">${taskData.task}</span>
+                            <input type="checkbox" class="task__column" value="toDo" ${taskData.toDo}>
+                            <input type="checkbox" class="task__column" value="done" ${taskData.done}>
+                            <span class="task__column delete__task">x</span>`;
+        
+        taskList.appendChild(divTask);
+    })
+})
+
 //Submit Event
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -17,7 +35,7 @@ form.addEventListener('submit', function(e) {
         //List Element creation
         const divTask = document.createElement('div');
         divTask.classList.add('task__container', 'redTasks');
-        divTask.setAttribute('data-id', i++);
+        divTask.id = `task${i++}`;
         divTask.innerHTML = `<span class="task">${task}</span>
                             <input type="checkbox" class="task__column" value="toDo" checked>
                             <input type="checkbox" class="task__column" value="done">
@@ -30,10 +48,22 @@ form.addEventListener('submit', function(e) {
         } else {
             taskList.insertBefore(divTask, greenTask);
         }
-
+        //Proccess to save task in Storage
         getTaskData(taskList);
-        /*const taskObject = saveTaskDataInLS();*/
-        /*console.log(taskObject);*/
+        //Add data-id attribute to every div that has been created
+        let importTasks;
+        importTasks = changeLSinArray();
+        const taskElement = document.getElementById(`task${i-1}`);
+        importTasks.forEach(function(taskData, index){
+            if(taskElement.querySelector('.task').textContent === taskData.task){
+                taskElement.setAttribute('data-id', index);
+                if(document.querySelector('.greenTasks') !== null){
+                    for(i=index+1; i<=importTasks.length-1; i++){
+                        document.querySelectorAll('.task__container')[i].setAttribute('data-id', i);
+                    }
+                }
+            }
+        })
 
     } else {
         alert('Primero escriba una tarea');
@@ -56,13 +86,15 @@ taskContainer.addEventListener('click', function(e) {
         divTask.classList.add('greenTasks');
         setTimeout(function() {
             taskList.insertBefore(divTask, lastTask.nextSibling);
-        }, 1000);
+       }, 1000);
+
         //Add the green class in Storage
         let task;
+        task = changeLSinArray();
+        
         let indexTask;
         let taskDone;
 
-        task = changeLSinArray();
         indexTask = divTask.getAttribute('data-id');
         task[indexTask].classTask = 'task__container greenTasks';
         task[indexTask].toDo = 'unchecked';
@@ -71,6 +103,13 @@ taskContainer.addEventListener('click', function(e) {
         taskDone = task[indexTask];
         task.splice(indexTask, 1);
         task.push(taskDone);
+        //Change data-id due to the elements order in DOM
+        setTimeout(function(){
+            const divTaskArray = document.querySelectorAll('.task__container');
+            task.forEach(function(taskData, index) {
+                divTaskArray[index].setAttribute('data-id', index);
+            });
+        }, 1000);
 
         localStorage.setItem('tasks', JSON.stringify(task));
         
@@ -100,6 +139,13 @@ taskContainer.addEventListener('click', function(e) {
         taskToDo = task[indexTask];
         task.splice(indexTask, 1);
         task.unshift(taskToDo);
+        //Change data-id due to the elements order in DOM
+        setTimeout(function(){
+            const divTaskArray = document.querySelectorAll('.task__container');
+            task.forEach(function(taskData, index) {
+                divTaskArray[index].setAttribute('data-id', index);
+            });
+        }, 1000);
 
         localStorage.setItem('tasks', JSON.stringify(task));
 
@@ -112,35 +158,17 @@ taskContainer.addEventListener('click', function(e) {
     }
 });
 
-//DOMContent loaded event
-document.addEventListener('DOMContentLoaded', function() {
-    let importTasks;
-    importTasks = changeLSinArray();
-
-    importTasks.forEach(function(taskData, index) {
-        const divTask = document.createElement('div');
-        divTask.className = `${taskData.classTask}`;
-        divTask.setAttribute('data-id', index);
-        divTask.innerHTML = `<span class="task">${taskData.task}</span>
-                            <input type="checkbox" class="task__column" value="toDo" ${taskData.toDo}>
-                            <input type="checkbox" class="task__column" value="done" ${taskData.done}>
-                            <span class="task__column delete__task">x</span>`;
-        
-        taskList.appendChild(divTask);
-    })
-})
-
 //FUNCTIONS 
 //Function to save the task data in an object
 function getTaskData(taskList) {
     const taskData = {
         classTask: taskList.querySelector('div.task__container').classList.value,
-        task: taskList.querySelector(`div[data-id='${i-1}'] span`).textContent,
-        id: taskList.querySelector(`div[data-id='${i-1}']`).getAttribute('data-id'),
+        task: taskList.querySelector(`#task${i-1} span`).textContent,
+        //id: taskList.querySelector(`div[data-id='${i-1}']`).getAttribute('data-id'),
         toDo: 'checked',
         done: 'unchecked'
     }
-    
+
     saveTaskDataInLS(taskData);
     //return taskData;
 }
@@ -163,8 +191,13 @@ function saveTaskDataInLS(newTask) {
         task.push(newTask);
     }
 
+    //Add id attribute to the object
+    task.forEach(function(element, index) {
+        element.id = index;
+    });
+
     localStorage.setItem('tasks', JSON.stringify(task));
-    /*return task;*/
+    
 }
 
 //Function to change LS in an array
@@ -176,6 +209,21 @@ function changeLSinArray() {
     } else {
         taskListLS = JSON.parse(localStorage.getItem('tasks'));
     }
-
+    //console.log(taskListLS);
     return taskListLS;
+}
+
+//Function to remove task from Local Storage 
+function removeTaskLS(taskDeleted) {
+    let importTasks;
+
+    importTasks = changeLSinArray();
+
+    importTasks.forEach(function(taskData, index){
+        if(taskDeleted == index) {
+            importTasks.splice(index, 1);
+        }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(importTasks));
 }
