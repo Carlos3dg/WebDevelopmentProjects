@@ -55,4 +55,4 @@ navLinks.addEventListener('click', function(e) {
         helpLink.classList.add('nav__link-clicked');
         helpContainer.classList.add('show__element');
     }
-})
+});
