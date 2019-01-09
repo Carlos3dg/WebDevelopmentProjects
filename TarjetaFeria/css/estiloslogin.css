@@ -50,6 +50,7 @@ html, body {
 
 * {
     box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -116,6 +117,9 @@ a:visited {
 /* VARIABLES */
 :root {
     --headerHeight: 12vh;
+    --front: 1;
+    --middleFront: 3;
+    --superFront: 5;
 }
 
 /* HEADER */
@@ -133,6 +137,8 @@ a:visited {
     width: 100%;
     height: 50%;
     background: rgb(0, 172, 255);
+    position: relative;
+    z-index: var(--front);
 }
 
 .toggle__button {
@@ -161,7 +167,7 @@ a:visited {
  }
 
 .header__title-container h1,
-.search__container {
+.header__title-container i {
     display: table-cell;
     vertical-align: middle;
     font-size: 1.3em;
@@ -169,33 +175,7 @@ a:visited {
 }
 
 .header__title-container h1 {
-    width: 60%;
-}
-
-.search__container {
-    width: 40%;
-    background-color: rgba(38, 154, 212, 0.7);
-    background-origin: content-box;
-    background-clip: content-box;
-    z-index: 1;
-    transition: all 400ms linear;
-    top: 0;
-}
-
-.search__container:hover {
-    background-color: rgba(38, 154, 212, 0.3);
-}
-
-.input__search {
-    background-color: rgba(255, 255, 255, 0);
-    width: 70%;
-    /*height: 70%;*/
-    border: none;
-    display: inline-block;
-}
-
-.input__search:focus {
-    border-color: red;
+    width: 80%;
 }
 
 .header__title-container i {
@@ -203,9 +183,49 @@ a:visited {
     cursor: pointer;
 }
 
+/* Nav links and search container */
+.search__container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    padding: 0 15px;
+    transition: all 400ms linear;
+    top: -100%;
+}
+
+.show__search {
+    top: 0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input__search {
+    width: 93%;
+    height: 100%;
+    border: 0;
+    display: inline-block;
+    padding: 0 10px;
+    outline: none;
+    font-size: 0.9em;
+    color: rgb(107, 105, 105);
+}
+
+.search-close__button {
+    display: inline-block;
+    background-color: transparent;
+    border: 0;
+    font-size: 1.2em;
+    color: rgb(107, 105, 105);
+    font-weight: 600;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+}
+
 .container__nav-links {
     height: 50%;
     background-color: rgb(133, 232, 245);
+    position: relative;
 }
 
 .container__nav-links li{
@@ -243,7 +263,7 @@ a:visited {
     background-color: rgb(133, 232, 245);
     transition: all 500ms linear;
     border-right: 1px solid rgb(27, 176, 196);
-    z-index: 2;
+    z-index: var(--superFront);
 }
 
 .active__sidebar {
@@ -257,7 +277,7 @@ a:visited {
     left: 60%;
     width: 40%;
     height: 100%;
-    z-index: 2;
+    z-index: var(--superFront);
 }
 
 .profile__container {
