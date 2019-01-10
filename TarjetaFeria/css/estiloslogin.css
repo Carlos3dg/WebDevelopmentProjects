@@ -41,6 +41,15 @@ a {
 /* Fonts */
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');
 
+/* VARIABLES */
+:root {
+    --headerHeight: 12vh;
+    --front: 1;
+    --middleFront: 3;
+    --superFront: 5;
+}
+
+
 /* General styles */
 html, body {
     font-size: 18px;
@@ -114,12 +123,10 @@ a:visited {
     display: block;
 }
 
-/* VARIABLES */
-:root {
-    --headerHeight: 12vh;
-    --front: 1;
-    --middleFront: 3;
-    --superFront: 5;
+.index__container, 
+.help__container,
+.sesion__container {
+    margin-top: var(--headerHeight);
 }
 
 /* HEADER */
@@ -382,10 +389,6 @@ a.profile__button {
 /* LOGIN */
 
 /* INDEX CONTENT */
-.index__container {
-    margin-top: 12vh;
-}
-
 .index__option-container {
     width: 46%;
     margin: 2%;
@@ -512,11 +515,27 @@ a.vialidad__button {
 }
 
 /*------------ HELP CONTENT -------------*/
+.help__container {
+    display: flex;
+    flex-direction: column;
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.faq__container {
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+}
 
-
-
-
+.ask__container {
+    width: 100%;
+    padding: 20% 5%;
+    background-color: #00acff;
+    color: #fff;
+    font-weight: 600;
+}
 
 
 
