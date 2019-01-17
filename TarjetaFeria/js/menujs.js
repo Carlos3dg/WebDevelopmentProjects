@@ -27,6 +27,7 @@ class UI {
     hideElement(element, className) {
         element.classList.remove(className);
     }
+
 }
 
 /* EVENT LISTENERS */
@@ -97,5 +98,34 @@ navLinks.addEventListener('click', function(e) {
         helpContainer.classList.add('show__element');
 
         ui.showSearchBar('help', '¿Cómo podemos ayudarte?');
+    }
+});
+
+//Click event in subject issues buttons
+document.querySelector('.help__container').addEventListener('click', function(e) {
+    if(e.target.classList.contains('subject-issue__text')) {
+        const id = e.target.getAttribute('data-id');
+        const issueId = parseInt(id);
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'db/faq.json', true);
+
+        xhr.onload = function() {
+            if(this.status === 200) {
+                const jsonFile = JSON.parse(this.responseText);
+
+                let html = '';
+
+                for(quest in jsonFile[issueId]) {
+                    html += `<h5>${quest}</h5>
+                             <p>${jsonFile[issueId][quest]}</p>`;
+                }
+
+                e.target.nextElementSibling.innerHTML = html;
+            }
+        }
+
+        xhr.send();
     }
 });
