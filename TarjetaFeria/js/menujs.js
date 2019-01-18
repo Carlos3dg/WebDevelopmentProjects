@@ -100,10 +100,11 @@ navLinks.addEventListener('click', function(e) {
         ui.showSearchBar('help', '¿Cómo podemos ayudarte?');
     }
 });
-
+let clickedButtons = [];
 //Click event in subject issues buttons
 document.querySelector('.help__container').addEventListener('click', function(e) {
     if(e.target.classList.contains('subject-issue__text')) {
+        clickedButtons.push(e.target.nextElementSibling);
         const id = e.target.getAttribute('data-id');
         const issueId = parseInt(id);
 
@@ -123,9 +124,36 @@ document.querySelector('.help__container').addEventListener('click', function(e)
                 }
 
                 e.target.nextElementSibling.innerHTML = html;
+                //e.target.setAttribute('href', `#faq1`);   
+                window.scrollTo({
+                    'behavior':'smooth',
+                    'left':0,
+                    'top':e.target.nextElementSibling.offsetTop - 250
+                });
             }
         }
 
         xhr.send();
+        //const targetLink = e.target.nextElementSibling.id
+        if(clickedButtons.length > 1) {
+            clickedButtons[0].innerHTML = '';
+            clickedButtons.shift();
+            //e.target.setAttribute('href', `#${targetLink}`);  
+
+        }
+        /*window.scrollTo({
+            'behavior':'smooth',
+            'left':0,
+            'top':e.target.nextElementSibling.offsetTop - 90
+        });*/
+        /*setTimeout(() => {
+            const topPos = e.target.nextElementSibling.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                'behavior':'smooth',
+                'left':0,
+                'top':topPos - 90
+            });
+        }, 100);*/
+
     }
 });

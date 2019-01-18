@@ -526,6 +526,7 @@ a.vialidad__button {
 
 .subject-issue__container {
     margin-bottom: 10%;
+    transition: all 500ms linear;
 }
 
 .subject-issue__container:last-child {
