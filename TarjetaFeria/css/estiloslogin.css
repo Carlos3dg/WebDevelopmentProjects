@@ -600,10 +600,25 @@ a.subject-issue__text:active::after  {
     text-align: justify;
 }
 
+.faq__container h5, .faq__container p {
+    animation: slide-up 0.7s ease;
+}
+
 .faq__container h5 {
     margin-top: 7%;
     margin-bottom: 4%;
     color: #00acff;
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 

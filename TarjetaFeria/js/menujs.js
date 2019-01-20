@@ -101,13 +101,15 @@ navLinks.addEventListener('click', function(e) {
     }
 });
 let clickedButtons = [];
+let faqHeight = [];
+let ids = [];
 //Click event in subject issues buttons
 document.querySelector('.help__container').addEventListener('click', function(e) {
     if(e.target.classList.contains('subject-issue__text')) {
         clickedButtons.push(e.target.nextElementSibling);
         const id = e.target.getAttribute('data-id');
         const issueId = parseInt(id);
-
+        ids.push(issueId);
         const xhr = new XMLHttpRequest();
 
         xhr.open('GET', 'db/faq.json', true);
@@ -124,36 +126,36 @@ document.querySelector('.help__container').addEventListener('click', function(e)
                 }
 
                 e.target.nextElementSibling.innerHTML = html;
-                //e.target.setAttribute('href', `#faq1`);   
+                if(ids[0] <= issueId) {
+                    faqHeight.push(e.target.nextElementSibling.offsetHeight);
+                }
+            }
+        } 
+
+        xhr.send();
+
+        if(clickedButtons.length > 1) {
+            if(ids[0] < issueId) {
+                let topDom = faqHeight[0] + 100;
                 window.scrollTo({
                     'behavior':'smooth',
                     'left':0,
-                    'top':e.target.nextElementSibling.offsetTop - 250
+                    'top':e.target.offsetTop - topDom
                 });
+                faqHeight.shift();
+            } else {
+                window.scrollTo({
+                    'behavior':'smooth',
+                    'left':0,
+                    'top':e.target.offsetTop - 90
+                })
             }
-        }
-
-        xhr.send();
-        //const targetLink = e.target.nextElementSibling.id
-        if(clickedButtons.length > 1) {
             clickedButtons[0].innerHTML = '';
             clickedButtons.shift();
-            //e.target.setAttribute('href', `#${targetLink}`);  
-
+            setTimeout(() => {
+                ids.shift();
+            }, 100)  
         }
-        /*window.scrollTo({
-            'behavior':'smooth',
-            'left':0,
-            'top':e.target.nextElementSibling.offsetTop - 90
-        });*/
-        /*setTimeout(() => {
-            const topPos = e.target.nextElementSibling.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-                'behavior':'smooth',
-                'left':0,
-                'top':topPos - 90
-            });
-        }, 100);*/
 
     }
 });
