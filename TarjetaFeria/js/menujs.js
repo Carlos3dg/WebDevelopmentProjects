@@ -174,3 +174,34 @@ document.querySelector('.help__container').addEventListener('click', function(e)
 
     }
 });
+
+const issueTypes = document.querySelectorAll('.subject-issue__text');
+const issuesAr = Array.from(issueTypes);
+
+const textIssues = issuesAr.map((issue) => {
+    return issue.textContent;
+});
+
+document.querySelector('.input__search').addEventListener('keydown', function(e) {
+    const inputValue = e.target.value;
+
+    if(inputValue == '') {
+        for(let i = 0; i < issueTypes.length; i++) {
+            issueTypes[i].parentElement.style.display = 'block';
+        }
+    } else {
+
+        for(let i = 0; i < issueTypes.length; i++) {
+            issueTypes[i].parentElement.style.display = 'none';
+        }
+    }
+
+    textIssues.forEach((issue, index) => {
+        if(issue.indexOf(inputValue) !== -1) {
+            issueTypes[index].parentElement.style.display = 'block';
+        }
+    });
+
+});
+
+
