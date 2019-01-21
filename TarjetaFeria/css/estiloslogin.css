@@ -541,12 +541,7 @@ a.vialidad__button {
     line-height: 6em;
     padding: 0% 3% 0% 10%;
     font-size: 1.3em;
-    color: rgb(20, 139, 155);
-    border-bottom: 6px solid rgb(27, 176, 196);
-    background-color: rgb(133, 232, 245);
-    background-image: linear-gradient(to bottom, rgb(105, 217, 231), rgb(156, 233, 243));
     border-radius: 5px;
-    box-shadow: inset 2px 2px rgb(186, 235, 241);
     z-index: var(--front);
     /*box-sizing: content-box;*/
 }
@@ -576,21 +571,48 @@ a.subject-issue__text::before {
     box-shadow: 0 2px 2px 0px #bfbfbf;
 }
 
-.subject-issue__text::before,
-.subject-issue__text::after {
-    border: 1px solid rgb(27, 176, 196);
-    border-bottom: 1px solid rgb(20, 139, 155);
-}
-
 a.subject-issue__text:active::before,
 a.subject-issue__text:active::after  {
     border: none;
     box-shadow: none;
 }
 
-.subject-issue__text:hover {
+.subject-issue__blue::before,
+.subject-issue__blue::after {
+    border: 1px solid rgb(27, 176, 196);
+    border-bottom: 1px solid rgb(20, 139, 155);
+}
+
+.subject-issue__blue {
+    color: rgb(20, 139, 155);
+    border-bottom: 6px solid rgb(27, 176, 196);
+    background-color: rgb(133, 232, 245);
+    background-image: linear-gradient(to bottom, rgb(105, 217, 231), rgb(156, 233, 243));
+    box-shadow: inset 2px 2px rgb(186, 235, 241);
+}
+
+.subject-issue__blue:hover {
     background-color: rgb(133, 232, 245);
     background-image: linear-gradient(to top, rgb(105, 217, 231), rgb(156, 233, 243));
+}
+
+.subject-issue__green {
+    color: rgb(9, 145, 43);
+    border-bottom: 6px solid rgb(31, 179, 75);
+    background-color: rgb(132, 241, 99);
+    background-image: linear-gradient(to bottom, rgb(135, 241, 102), rgb(157, 241, 132));
+    box-shadow: inset 2px 2px rgb(192, 243, 177);
+}
+
+.subject-issue__green::before,
+.subject-issue__green::after {
+    border: 1px solid rgb(31, 179, 75);
+    border-bottom: 1px solid rgb(9, 145, 43);
+}
+
+.subject-issue__green:hover {
+    background-color: rgb(132, 241, 99);
+    background-image: linear-gradient(to top, rgb(135, 241, 102), rgb(157, 241, 132));
 }
 
 /* FAQ */
@@ -607,7 +629,14 @@ a.subject-issue__text:active::after  {
 .faq__container h5 {
     margin-top: 7%;
     margin-bottom: 4%;
+}
+
+.subject-issue__blue + .faq__container h5 {
     color: #00acff;
+}
+
+.subject-issue__green + .faq__container h5 {
+    color: rgb(68, 210, 25);
 }
 
 @keyframes slide-up {

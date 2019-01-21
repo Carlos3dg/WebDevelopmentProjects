@@ -5,6 +5,9 @@ const toggleButton = document.querySelector('.toggle__button');
 const navLinks = document.querySelector('.container__nav-links');
 const searchButton = document.querySelector('.search__button');
 const searchClose = document.querySelector('.search-close__button');
+let clickedButtons = []; //Array to storage the actual and last issue buttons clicked
+let faqHeight = []; //Array to storage the FAQ container height where json is in.
+let ids = []; //Array to storage the subject issue buttons ids
 
 //CLASSES
 class UI {
@@ -100,61 +103,73 @@ navLinks.addEventListener('click', function(e) {
         ui.showSearchBar('help', '¿Cómo podemos ayudarte?');
     }
 });
-let clickedButtons = [];
-let faqHeight = [];
-let ids = [];
+
 //Click event in subject issues buttons
 document.querySelector('.help__container').addEventListener('click', function(e) {
+
     if(e.target.classList.contains('subject-issue__text')) {
+        //Storage the sibling of the issue button that has been clicked
         clickedButtons.push(e.target.nextElementSibling);
         const id = e.target.getAttribute('data-id');
-        const issueId = parseInt(id);
+        const issueId = parseInt(id); //Actual id button clicked
+        //Storage the id from the button
         ids.push(issueId);
+        //Create an XML instance
         const xhr = new XMLHttpRequest();
-
+        //Open connection
         xhr.open('GET', 'db/faq.json', true);
-
+        //Procces to onload file in HTML
         xhr.onload = function() {
             if(this.status === 200) {
                 const jsonFile = JSON.parse(this.responseText);
 
                 let html = '';
-
+                //for... in to iterate the properties of the jsonFile[issueId] object
                 for(quest in jsonFile[issueId]) {
-                    html += `<h5>${quest}</h5>
+                    html += `<h5>${quest}</h5> 
                              <p>${jsonFile[issueId][quest]}</p>`;
                 }
-
+                //Insertion of the requested data in our DOM
                 e.target.nextElementSibling.innerHTML = html;
+                //If last id button is smaller or equal to the actual id button
                 if(ids[0] <= issueId) {
+                    //Storage the FAQ height where the json was innered
                     faqHeight.push(e.target.nextElementSibling.offsetHeight);
                 }
             }
         } 
-
-        xhr.send();
-
+        //Send request
+        xhr.send(); 
+        //If issue buttons that has been clicked are greater than 1
         if(clickedButtons.length > 1) {
+            //If last clicked button id is smaller than actual clicked button id
             if(ids[0] < issueId) {
+                //Get the height of the FAQ container where the last injection were and the height header
                 let topDom = faqHeight[0] + 100;
+                //Colocate at the top the correct coordinates (where the last FAQ container is in)
                 window.scrollTo({
                     'behavior':'smooth',
                     'left':0,
-                    'top':e.target.offsetTop - topDom
+                    'top': e.target.getBoundingClientRect().top + window.scrollY - topDom
                 });
+                //Delete now the height of the last FAQ container to open space to the actual FAQ at the index zero
                 faqHeight.shift();
             } else {
+                //if not just take the height of the header and colocate the button at the top less header
                 window.scrollTo({
                     'behavior':'smooth',
                     'left':0,
                     'top':e.target.offsetTop - 90
-                })
+                });
             }
-            clickedButtons[0].innerHTML = '';
+            //Delete injection of the last clicked button
+           clickedButtons[0].innerHTML = '';
+           //Delete the correspond element in the array
             clickedButtons.shift();
+            //Delete the correspond id but in a amount of time to start executing the AJAX procces in the 135 line.
             setTimeout(() => {
                 ids.shift();
-            }, 100)  
+            }, 100);  
         }
 
     }
