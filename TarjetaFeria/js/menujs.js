@@ -8,6 +8,7 @@ const searchClose = document.querySelector('.search-close__button');
 let clickedButtons = []; //Array to storage the actual and last issue buttons clicked
 let faqHeight = []; //Array to storage the FAQ container height where json is in.
 let ids = []; //Array to storage the subject issue buttons ids
+let dropListHelp = []; //Array to storage the drop list arrow in help section
 
 //CLASSES
 class UI {
@@ -108,6 +109,10 @@ navLinks.addEventListener('click', function(e) {
 document.querySelector('.help__container').addEventListener('click', function(e) {
 
     if(e.target.classList.contains('subject-issue__text')) {
+        //move the drop list to down
+        const dropList = e.target.firstChild;
+        dropList.classList.add('drop-down-list__sprite');
+        dropListHelp.push(dropList);
         //Storage the sibling of the issue button that has been clicked
         clickedButtons.push(e.target.nextElementSibling);
         const id = e.target.getAttribute('data-id');
@@ -162,6 +167,11 @@ document.querySelector('.help__container').addEventListener('click', function(e)
                     'top':e.target.offsetTop - 90
                 });
             }
+            //Remove the class that moves our drop list to down
+            if(dropListHelp[0] !== dropListHelp[1]) {
+                dropListHelp[0].classList.remove('drop-down-list__sprite')
+            }
+            dropListHelp.shift();
             //Delete injection of the last clicked button
            clickedButtons[0].innerHTML = '';
            //Delete the correspond element in the array
