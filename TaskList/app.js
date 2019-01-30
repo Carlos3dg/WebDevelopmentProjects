@@ -2,7 +2,7 @@
 const form = document.querySelector('.form__task');
 const taskContainer = document.querySelector('.task-list__container');
 const taskList = document.querySelector('.task-list')
-let i = 0;
+//let i = 0;
 
 //EVENT LISTENERS
 //DOMContent loaded event
@@ -33,7 +33,7 @@ form.addEventListener('submit', function(e) {
         //List Element creation
         const divTask = document.createElement('div');
         divTask.classList.add('task__container', 'redTasks');
-        divTask.id = `task${i++}`;
+       // divTask.id = `task${i++}`;
         divTask.innerHTML = `<span class="task">${task}</span>
                             <input type="checkbox" class="task__column" value="toDo" checked>
                             <input type="checkbox" class="task__column" value="done">
@@ -47,14 +47,13 @@ form.addEventListener('submit', function(e) {
             taskList.insertBefore(divTask, greenTask);
         }
         //Proccess to save task in Storage
-        getTaskData(taskList);
+        getTaskData(divTask);
         //Add data-id attribute to every div that has been created
         let importTasks;
         importTasks = changeLSinArray();
-        const taskElement = document.getElementById(`task${i-1}`);
         importTasks.forEach(function(taskData, index){
-            if(taskElement.querySelector('.task').textContent === taskData.task){
-                taskElement.setAttribute('data-id', index);
+            if(divTask.querySelector('.task').textContent === taskData.task){
+                divTask.setAttribute('data-id', index);
                 if(document.querySelector('.greenTasks') !== null){
                     for(i=index+1; i<=importTasks.length-1; i++){
                         document.querySelectorAll('.task__container')[i].setAttribute('data-id', i);
@@ -158,10 +157,10 @@ taskContainer.addEventListener('click', function(e) {
 
 //FUNCTIONS 
 //Function to save the task data in an object
-function getTaskData(taskList) {
+function getTaskData(divTask) {
     const taskData = {
-        classTask: taskList.querySelector('div.task__container').classList.value,
-        task: taskList.querySelector(`#task${i-1} span`).textContent,
+        classTask: divTask.classList.value,
+        task: divTask.querySelector(`span`).textContent,
         //id: taskList.querySelector(`div[data-id='${i-1}']`).getAttribute('data-id'),
         toDo: 'checked',
         done: 'unchecked'
