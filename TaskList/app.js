@@ -2,7 +2,6 @@
 const form = document.querySelector('.form__task');
 const taskContainer = document.querySelector('.task-list__container');
 const taskList = document.querySelector('.task-list')
-//let i = 0;
 
 //EVENT LISTENERS
 //DOMContent loaded event
@@ -33,7 +32,6 @@ form.addEventListener('submit', function(e) {
         //List Element creation
         const divTask = document.createElement('div');
         divTask.classList.add('task__container', 'redTasks');
-       // divTask.id = `task${i++}`;
         divTask.innerHTML = `<span class="task">${task}</span>
                             <input type="checkbox" class="task__column" value="toDo" checked>
                             <input type="checkbox" class="task__column" value="done">
