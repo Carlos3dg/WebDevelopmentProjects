@@ -11,12 +11,46 @@ class Task {
         this.toDo = 'checked';
         this.done = 'unchecked';
     }
+    //Method to save taskData in LS
+    saveTaskDataInLS(newTask) {
+        let task;
+        //We call the changeLSinArray method to get the data as array
+        task = this.changeLSinArray();
+        //A map function to get all classTask properties as array
+        const classArray = task.map(function(task) {
+            return task.classTask;
+        });
+        //The index number of an element with the greenTasks value
+        const indexGreenTask = classArray.indexOf('greenTasks');
+        //Condition to insert the new tasks before a green one in our storage
+        if (indexGreenTask !== -1) {
+            task.splice(indexGreenTask, 0, newTask);
+        } else {
+            task.push(newTask);
+        }
+
+        localStorage.setItem('tasks', JSON.stringify(task));
+
+    }
+    //Method to get the data from LS as array
+    changeLSinArray() {
+        let taskListLS;
+
+        if(localStorage.getItem('tasks') === null) {
+            taskListLS = [];
+        } else {
+            taskListLS = JSON.parse(localStorage.getItem('tasks'));
+        }
+
+        return taskListLS;
+    }
 
 }
 
  // Class to insert and design elements in DOM
 class UI {
     constructor() {
+        //Default values for a done task
         this.edgeTask = taskList.lastElementChild;
         this.removeClass = 'redTasks';
         this.addedClass = 'greenTasks';
@@ -33,7 +67,7 @@ class UI {
 
         return divTask;
     }
-
+    //Method to change the checkbox and the position of a task
     checkboxesValidation(unselectedCheck, task, checkBoxType) {
         //Checkbox that becomes not select
         const checkbox = unselectedCheck;
@@ -43,18 +77,21 @@ class UI {
         const edgeTask = this.edgeTask;
         divTask.classList.remove(this.removeClass);
         divTask.classList.add(this.addedClass);
-        if(checkBoxType === 'done') {
-            setTimeout(() => {
+        //Evakuate the kidn of checkbox to determine if this task is inserted at the end or at the beginning
+        setTimeout(() => {
+            if(checkBoxType === 'done') {
                 taskList.insertBefore(divTask, edgeTask.nextSibling);
-           }, 1000);
-        } else if (checkBoxType === 'toDo'){
-            setTimeout(() => {
+            } else if (checkBoxType === 'toDo') {
                 taskList.insertBefore(divTask, edgeTask);
-            }, 1000);
-        }
+            }
+        }, 1000);
 
     }
-
+    //Method to remove a task from the DOM
+    removeTask(task) {
+        task.remove();
+    }
+    //Method to change the default values when a task change to toDo
     changeDefaultValues() {
         this.edgeTask = taskList.firstElementChild;
         this.removeClass = 'greenTasks';
@@ -84,6 +121,8 @@ form.addEventListener('submit', function(e) {
         } else {
             taskList.insertBefore(divTask, greenTask);
         }
+        //Call the saveTaskData Method to save the taskObj in LS
+        taskObj.saveTaskDataInLS(taskObj);
     
     } else {
         alert('Please type a task before submit');
@@ -99,10 +138,15 @@ taskList.addEventListener('click', function(e) {
     //Checkboxes
     const ui = new UI()
     if(e.target.value === 'done') {
+        //We call the method with the task, checkbox and the kind of check as parameters
         ui.checkboxesValidation(e.target.previousElementSibling, e.target, 'done');
 
     } else if (e.target.value === 'toDo') {
+        //When the kind of check is toDo it is necessary to change the defaultValues
         ui.changeDefaultValues();
         ui.checkboxesValidation(e.target.nextElementSibling, e.target, 'toDo');
+
+    } else if (e.target.textContent === 'x') {
+        ui.removeTask(e.target.parentElement);
     }
 });
