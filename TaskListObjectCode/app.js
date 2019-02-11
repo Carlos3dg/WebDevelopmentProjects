@@ -44,7 +44,50 @@ class Task {
 
         return taskListLS;
     }
+    //Method to change the classTask property and its position in LS
+    changePositionInLS(divTask) {
+        let task;
+        task = this.changeLSinArray();
+        
+        let indexTask;
+        let taskChanged;
 
+        indexTask = divTask.getAttribute('data-id');
+        task[indexTask].classTask = this.classTask;
+        task[indexTask].toDo = this.toDo;
+        task[indexTask].done = this.done;
+
+        taskChanged = task[indexTask];
+        task.splice(indexTask, 1);
+        if (this.toDo === 'unchecked' && this.done === 'checked') {
+            task.push(taskChanged);
+        } else {
+            task.unshift(taskChanged);
+        }
+
+        localStorage.setItem('tasks', JSON.stringify(task));
+
+        return task;
+    }
+
+    removeTaskLS(taskDeleted) {
+        let importTasks = this.changeLSinArray();
+
+        importTasks.forEach((taskObj, index) => {
+            if(taskObj.task == taskDeleted) {
+                importTasks.splice(index, 1);
+            }
+        });
+
+        localStorage.setItem('tasks', JSON.stringify(importTasks));
+
+    }
+
+    changeDefaultValues() {
+        this.classTask = 'greenTasks';
+        this.toDo = 'unchecked';
+        this.done = 'checked';
+    }
 }
 
  // Class to insert and design elements in DOM
@@ -74,22 +117,32 @@ class UI {
         checkbox.checked = false;
         //Select the task that is clicked and the edge task, the first one or last one depending of the kind of checkbox
         const divTask = task.parentElement;
-        const edgeTask = this.edgeTask;
         divTask.classList.remove(this.removeClass);
         divTask.classList.add(this.addedClass);
-        //Evakuate the kidn of checkbox to determine if this task is inserted at the end or at the beginning
+
+        return divTask;
+    }
+    //Method to evaluate the kind of checkbox to determine where to insert the task in DOM
+    changeDataIdAndTaskPosition(checkBoxType, divTask, task) {
         setTimeout(() => {
             if(checkBoxType === 'done') {
-                taskList.insertBefore(divTask, edgeTask.nextSibling);
+                taskList.insertBefore(divTask, this.edgeTask.nextSibling);
             } else if (checkBoxType === 'toDo') {
-                taskList.insertBefore(divTask, edgeTask);
+                taskList.insertBefore(divTask, this.edgeTask);
             }
-        }, 1000);
 
+            const divTaskArray = document.querySelectorAll('.task__container');
+            task.forEach(function(taskData, index) {
+                divTaskArray[index].setAttribute('data-id', index);
+            });
+
+        }, 1000);
     }
     //Method to remove a task from the DOM
     removeTask(task) {
+        const taskDeleted = task.firstElementChild.textContent;
         task.remove();
+        return taskDeleted;
     }
     //Method to change the default values when a task change to toDo
     changeDefaultValues() {
@@ -100,6 +153,22 @@ class UI {
 }
 
 //Event Listeners
+//DOMContent Loaded event
+document.addEventListener('DOMContentLoaded', function() {
+    const ui = new UI();
+    const taskObj = new Task();
+    let divTask
+    let importTasks;
+    importTasks = taskObj.changeLSinArray();
+
+    importTasks.forEach((taskData, index) => {
+        divTask = ui.insertTaskInDOM(taskData);
+        divTask.setAttribute('data-id', index);
+        taskList.appendChild(divTask);
+
+    });
+});
+
 //Submit event
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -123,6 +192,19 @@ form.addEventListener('submit', function(e) {
         }
         //Call the saveTaskData Method to save the taskObj in LS
         taskObj.saveTaskDataInLS(taskObj);
+        //Add data-id attribute to every div that has been created
+        let importTasks;
+        importTasks = taskObj.changeLSinArray();
+        importTasks.forEach(function(taskData, index){
+            if(divTask.querySelector('.task').textContent === taskData.task){
+                divTask.setAttribute('data-id', index);
+                if(document.querySelector('.greenTasks') !== null){
+                    for(i=index+1; i<importTasks.length; i++){
+                        document.querySelectorAll('.task__container')[i].setAttribute('data-id', i);
+                    }
+                }
+            }
+        });
     
     } else {
         alert('Please type a task before submit');
@@ -136,17 +218,28 @@ form.addEventListener('submit', function(e) {
 taskList.addEventListener('click', function(e) {
     //DELEGATION
     //Checkboxes
-    const ui = new UI()
+    const ui = new UI();
+    const taskObj = new Task();
     if(e.target.value === 'done') {
         //We call the method with the task, checkbox and the kind of check as parameters
-        ui.checkboxesValidation(e.target.previousElementSibling, e.target, 'done');
+        const divTask = ui.checkboxesValidation(e.target.previousElementSibling, e.target);
+
+        taskObj.changeDefaultValues();
+        const task = taskObj.changePositionInLS(divTask);
+
+        ui.changeDataIdAndTaskPosition('done', divTask, task);
 
     } else if (e.target.value === 'toDo') {
         //When the kind of check is toDo it is necessary to change the defaultValues
         ui.changeDefaultValues();
-        ui.checkboxesValidation(e.target.nextElementSibling, e.target, 'toDo');
+        const divTask = ui.checkboxesValidation(e.target.nextElementSibling, e.target);
+
+        const task = taskObj.changePositionInLS(divTask);
+
+        ui.changeDataIdAndTaskPosition('toDo', divTask, task);
 
     } else if (e.target.textContent === 'x') {
-        ui.removeTask(e.target.parentElement);
+        const taskDeleted = ui.removeTask(e.target.parentElement);
+        taskObj.removeTaskLS(taskDeleted);
     }
 });

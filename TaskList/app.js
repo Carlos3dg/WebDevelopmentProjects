@@ -146,10 +146,10 @@ taskContainer.addEventListener('click', function(e) {
 
       //Delete button 'x'  
     } else if (e.target.textContent === 'x') {
-        let taskDeleted = e.target.parentElement.getAttribute('data-id');
+        let taskDeleted = e.target.parentElement;
         e.target.parentElement.remove();
         //Delete taskData in Storage
-        removeTaskLS(taskDeleted);
+        removeTaskLS(taskDeleted.firstElementChild.textContent);
     }
 });
 
@@ -215,7 +215,7 @@ function removeTaskLS(taskDeleted) {
     importTasks = changeLSinArray();
 
     importTasks.forEach(function(taskData, index){
-        if(taskDeleted == index) {
+        if(taskDeleted == taskData.task) {
             importTasks.splice(index, 1);
         }
     });
